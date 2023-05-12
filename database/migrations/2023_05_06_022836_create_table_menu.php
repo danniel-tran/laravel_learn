@@ -13,7 +13,7 @@ class CreateTableMenu extends Migration
      */
     public function up()
     {
-        Schema::create('table_menu', function (Blueprint $table) {
+        Schema::create('menu', function (Blueprint $table) {
             $table->id();
             $table->string("name");
             $table->string("status");
@@ -21,7 +21,8 @@ class CreateTableMenu extends Migration
             $table->string("link");
             $table->string("type_menu");  // category_article | category_blog
             $table->string("type_open");  // new_window | new_tab | current
-            $table->timestamps();
+            $table->dateTime("created_at");
+            $table->dateTime("modified_at");
         });
     }
 
@@ -32,6 +33,6 @@ class CreateTableMenu extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_menu');
+        Schema::dropIfExists('menu');
     }
 }

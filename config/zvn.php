@@ -3,7 +3,7 @@
 return [
     'url'              => [
         'prefix_admin' => 'admin123',
-        'prefix_news'  => 'news69',
+        'prefix_news'  => '',
     ],
     'format'           => [
         'long_time'    => 'H:m:s d/m/Y',
@@ -22,6 +22,14 @@ return [
       
         'form_ckeditor' => [
             'class' => 'form-control col-md-6 col-xs-12 ckeditor'
+        ],
+        'type_open' => [
+            'new_tab'    => ['name' => 'Tab mới'],
+            'current'    => ['name' => 'Tab hiện tại']
+        ],
+        'type_menu' => [
+            'category_article'    => ['name' => 'Tab mới'],
+            'category_blog'    => ['name' => 'Tab hiện tại']
         ],
         'status'       => [
             'all'      => ['name' => 'Tất cả', 'class' => 'btn-success'],
@@ -83,8 +91,9 @@ return [
             'slider'    => ['edit', 'delete'],
             'category'  => ['edit', 'delete'],
             'article'   => ['edit', 'delete'],
-            'rss'   => ['edit', 'delete'],
+            'rss'       => ['edit', 'delete'],
             'user'      => ['edit'],
+            'menu'      => ['edit', 'delete'],
         ]
     ]
     

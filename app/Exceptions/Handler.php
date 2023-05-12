@@ -50,7 +50,7 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception)
     {
         if ($this->isHttpException($exception)) {
-            if ($exception->getCode() == 404) {
+            if ($exception->getStatusCode() == 404) {
                 return redirect(route('notFound/index'));
             }
         }
