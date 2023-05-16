@@ -188,6 +188,9 @@ ul.main_nav_list li.active a {
     width: auto;
     z-index: 100;
 }
+.menu_mm_child li{
+    white-space: nowrap;
+}
 
 .main_nav_list>li {
     position: relative;

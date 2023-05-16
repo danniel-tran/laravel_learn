@@ -13,21 +13,22 @@
         $xhtmlMenu = '<nav class="main_nav"><ul class="main_nav_list d-flex flex-row align-items-center justify-content-start">';
         $xhtmlMenuMobile = '<nav class="menu_nav"><ul class="menu_mm">';
         $categoryIdCurrent = Route::input('category_id');
-
         foreach ($itemsMenu as $item) {
             $link        = $item['link'];
             $classActive = ($categoryIdCurrent == $item['id']) ? 'class="active"' : '';
             $xhtml_child = '';
 
             if($item['type_menu'] == 'category_article'){
-                $link_category       =  URL::linkCategory($item['id'], $item['name']);
-                $xhtml_child .= '<ul class="menu_mm_child">';
+                $xhtml_child = '<ul class="menu_mm_child">';
                 foreach ($itemsCategory as $category) {
-                    $xhtml_child = '<li class=""><a href="'.$link_category.'">'.$category['name'].'</a></li>';
+                    $link_category       =  URL::linkCategory($category['id'], $category['name']);
+                    $xhtml_child .= '<li>
+                        <a href="'.$link_category.'">'.$category['name'].'</a>
+                    </li>';
                 }
                 $xhtml_child .= ' </ul>';
-            }
-            $xhtmlMenu .= sprintf('<li %s><a href="%s">%s</a>%s</li>', $classActive, $link, $item['name'],$xhtml_child);
+            };
+            $xhtmlMenu .= sprintf('<li %s><a href="%s">%s</a> %s</li>', $classActive, $link, $item['name'],$xhtml_child);
             $xhtmlMenuMobile .= sprintf('<li class="menu_mm"><a href="%s">%s</a></li>', $link, $item['name'],);
         }
 

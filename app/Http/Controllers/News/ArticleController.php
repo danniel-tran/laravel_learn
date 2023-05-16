@@ -6,6 +6,7 @@ use Illuminate\Http\Request;;
 
 use App\Models\ArticleModel;
 use App\Models\CategoryModel;
+use App\Models\MenuModel;
 
 class ArticleController extends Controller
 {
@@ -23,12 +24,14 @@ class ArticleController extends Controller
     {   
         $params["article_id"]  = $request->article_id;
         $articleModel  = new ArticleModel();
+        $menuModel     = new MenuModel();
         
 
         $itemArticle = $articleModel->getItem($params, ['task' => 'news-get-item']);
         if(empty($itemArticle))  return redirect()->route('home');
         
         $itemsLatest   = $articleModel->listItems(null, ['task'  => 'news-list-items-latest']);
+        $itemsMenu     = $menuModel->listItems(null, ['task'  => 'news-list-items']);
         
         $params["category_id"]  = $itemArticle['category_id'];
         $itemArticle['related_articles'] = $articleModel->listItems($params, ['task' => 'news-list-items-related-in-category']);
@@ -36,7 +39,8 @@ class ArticleController extends Controller
         return view($this->pathViewController .  'index', [
             'params'        => $this->params,
             'itemsLatest'   => $itemsLatest,
-            'itemArticle'  => $itemArticle
+            'itemArticle'  => $itemArticle,
+            'itemsMenu'  => $itemsMenu
         ]);
     } 
 }

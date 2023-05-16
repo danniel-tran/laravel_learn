@@ -8,6 +8,7 @@ use Illuminate\Http\Request;;
 use App\Models\SliderModel;
 use App\Models\ArticleModel;
 use App\Models\CategoryModel;
+use App\Models\MenuModel;
 
 class NotFoundController extends Controller
 {
@@ -24,10 +25,13 @@ class NotFoundController extends Controller
     public function index(Request $request)
     {
         $articleModel  = new ArticleModel();
+        $menuModel     = new MenuModel();
         $itemsLatest   = $articleModel->listItems(null, ['task'  => 'news-list-items-latest']);
+        $itemsMenu     = $menuModel->listItems(null, ['task'  => 'news-list-items']);
 
         return view($this->pathViewController .  'index', [
             'itemsLatest'   => $itemsLatest,
+            'itemsMenu'     => $itemsMenu,
         ]);
     }
 }

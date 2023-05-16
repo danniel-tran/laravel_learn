@@ -23,9 +23,6 @@ class AuthController extends Controller
         return view($this->pathViewController . 'login');
     }
 
-    // middelware
-    
-
     public function postLogin(MainRequest $request)
     {   
         if ($request->method() == 'POST') {
@@ -47,6 +44,4 @@ class AuthController extends Controller
         if($request->session()->has('userInfo')) $request->session()->pull('userInfo');
         return redirect()->route('home');
     }
-
- 
 }

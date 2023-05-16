@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\DB;
 class MenuModel extends AdminModel
 {
     public function __construct() {
-        $this->table               = 'table_menu';
-        $this->folderUpload        = 'table_menu' ; 
+        $this->table               = 'menu';
+        $this->folderUpload        = 'menu' ; 
         $this->fieldSearchAccepted = ['id', 'name', 'description', 'link']; 
         $this->crudNotAccepted     = ['_token','thumb_current'];
     }
@@ -116,6 +116,16 @@ class MenuModel extends AdminModel
             $params['modified_by']   = "hailan";
             $params['modified']      = date('Y-m-d');
             self::where('id', $params['id'])->update($this->prepareParams($params));
+        }
+
+        if($options['task'] == 'change-type-open') {
+            $type_open = $params['currentType'];
+            self::where('id', $params['id'])->update(['type_open' => $type_open ]);
+        }
+
+        if($options['task'] == 'change-type-menu') {
+            $type_menu = $params['currentType'];
+            self::where('id', $params['id'])->update(['type_menu' => $type_menu ]);
         }
     }
 
