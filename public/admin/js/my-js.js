@@ -129,3 +129,6 @@ $(document).ready(function () {
         });
     });
 });
+
+// laravel file manager
+

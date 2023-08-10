@@ -60,7 +60,7 @@ Route::group(['prefix' => $prefixNews, 'namespace' => 'News'], function () {
 
     Route::group(['prefix' =>  $prefix], function () use ($controllerName) {
         $controller = ucfirst($controllerName)  . 'Controller@';
-        Route::get('/login',        ['as' => $controllerName . '/login',      'uses' => $controller . 'login'])->middleware('check.login');
+        Route::get('/auth_login',        ['as' => $controllerName . '/login',      'uses' => $controller . 'login'])->middleware('check.login');
         Route::post('/postLogin',   ['as' => $controllerName . '/postLogin',  'uses' => $controller . 'postLogin']);
 
         // ====================== LOGOUT ========================
@@ -76,6 +76,14 @@ Route::group(['prefix' => $prefixNews, 'namespace' => 'News'], function () {
         Route::get('/get-gold',                             ['as' => "$controllerName/get-gold",                  'uses' => $controller . 'getGold']);
         Route::get('/get-coin',                             ['as' => "$controllerName/get-coin",                  'uses' => $controller . 'getCoin']);
     });
+
+    // ======================== GALLERY  ========================
+    $prefix = "";
+    $controllerName = 'gallery';
+    Route::group(['prefix' =>  $prefix], function () use ($controllerName) {
+        $controller = ucfirst($controllerName)  . 'Controller@';
+        Route::get('/thu-vien-hinh-anh',                      ['as' => "$controllerName/view-gallery",                  'uses' => $controller . 'index']);
+    });
 });
 
 // ======================== 404 PAGE ========================
@@ -85,5 +93,6 @@ Route::group(['prefix' =>  $prefix, 'namespace' => 'News'], function () use ($co
     $controller = ucfirst($controllerName)  . 'Controller@';
     Route::get("/not-found", ['as' => "$controllerName/index",                  'uses' =>  $controller . 'index']);
 });
+
 
 // bai-viet/suc-khoe-3.php

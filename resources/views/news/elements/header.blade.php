@@ -9,7 +9,6 @@
     $xhtmlMenuMobile = '';
 
     if (count($itemsMenu) > 0) {
-        
         $xhtmlMenu = '<nav class="main_nav"><ul class="main_nav_list d-flex flex-row align-items-center justify-content-start">';
         $xhtmlMenuMobile = '<nav class="menu_nav"><ul class="menu_mm">';
         $categoryIdCurrent = Route::input('category_id');
@@ -45,7 +44,6 @@
 @endphp
 
 <header class="header">
-
     <!-- Header Content -->
     <div class="header_content_container">
         <div class="container">

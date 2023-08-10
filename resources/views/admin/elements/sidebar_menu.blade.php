@@ -22,6 +22,7 @@
             <li><a href="{{ route('slider') }}"><i class="fa fa-sliders"></i> Silders</a></li>
             <li><a href="{{ route('rss') }}"><i class="fa fa-newspaper-o"></i> Rss</a></li>
             <li><a href="{{ route('menu') }}"><i class="fa fa-newspaper-o"></i> Menu</a></li>
+            <li><a href="{{ route('gallery') }}"><i class="fa fa-newspaper-o"></i> Gallery</a></li>
         </ul>
     </div>
 </div>

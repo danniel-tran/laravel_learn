@@ -1,0 +1,17 @@
+Buổi 03:
+- Gallery
+    1. Admin
+        1. Bổ sung phần quản lý Gallery 
+            1. Link sẽ có dạng là /gallery
+        2. Dùng Laravel File Manager để admin có thể up hình
+        3. Trong Laravel File Manager tạo ra folder gallery và upload các hình ảnh vào đó
+    2. Frontend thêm link Thư viện hình ảnh cho menu
+        1. Trang chủ
+        2. Blog
+        3. Tin tức tổng hợp
+        4. Thư viện hình ảnh
+        5. Login
+    3. Khi user đứng ở frontend và click vào menu Thư viện hình ảnh thì hiển thị tất cả hình ảnh trong folder gallery ra
+        1. Link: /thu-vien-hinh-anh
+- Active menu Frontend
+    - User truy cập trang nào thì active trang đó lên

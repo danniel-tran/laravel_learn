@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use UniSharp\LaravelFilemanager\Controllers\LfmController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,8 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 $prefixAdmin = config('zvn.url.prefix_admin');
+$prefixUrlLavavelFileManager = config('zvn.laravel_file_manager.prefix_url');
 
-Route::group(['prefix' => $prefixAdmin, 'namespace' => 'Admin', 'middleware' => ['permission.admin']], function () {
+Route::group(['prefix' => $prefixAdmin, 'namespace' => 'Admin', 'middleware' => ['permission.admin']], function () use ($prefixUrlLavavelFileManager) {
     // ============================== DASHBOARD ==============================
     $prefix         = 'dashboard';
     $controllerName = 'dashboard';
@@ -101,5 +104,16 @@ Route::group(['prefix' => $prefixAdmin, 'namespace' => 'Admin', 'middleware' => 
         Route::post('save',                         ['as' => $controllerName . '/save',        'uses' => $controller . 'save']);
         Route::get('delete/{id}',                   ['as' => $controllerName . '/delete',      'uses' => $controller . 'delete'])->where('id', '[0-9]+');
         Route::get('change-status-{status}/{id}',   ['as' => $controllerName . '/status',      'uses' => $controller . 'status'])->where('id', '[0-9]+');
+    });
+
+    // ============================== LARAVEL FILE MANAGER ==============================
+    $prefix         = 'gallery';
+    $controllerName = 'gallery';
+    Route::group(['prefix' => $prefix, 'middleware' => []], function () use ($controllerName, $prefixUrlLavavelFileManager) {
+        $controller = ucfirst($controllerName)  . 'Controller@';
+        Route::get('/',                             ['as' => $controllerName,                  'uses' => $controller . 'index']);
+        Route::group(['prefix' => "/$prefixUrlLavavelFileManager"], function () {
+            \UniSharp\LaravelFilemanager\Lfm::routes();
+        });
     });
 });
