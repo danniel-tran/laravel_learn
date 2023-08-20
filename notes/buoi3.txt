@@ -15,3 +15,20 @@ Buổi 03:
         1. Link: /thu-vien-hinh-anh
 - Active menu Frontend
     - User truy cập trang nào thì active trang đó lên
+
+Buổi 4 : 
+- quét là lấy tin từ rss lưu vào Database
+- Đọc tin từ Database
+  + Trong 1 giờ có tin được quét thì tin được đọc từ Database
+  + Nếu trong 1 giờ tin chưa được quét thì sẽ láy tin từ rss lưu vào Database, sau đó lấy từ Database
+
+
+- active menu
+- Đánh dấu tin đã xem
+
+=> Quản lý Database: 
+ + tạo databse mới chứa tin tức từ các link rss;
+ + Tạo event import các tin mới từ rss vào trong database mới này
+ + xử lý đọc tin chỉ từ database không coi rss
+ + tạo một history các tin đã xem => tạo Database
+ + active menu chưa có cách ***** :)))
