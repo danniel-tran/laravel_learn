@@ -16,11 +16,11 @@ Buổi 03:
 - Active menu Frontend
     - User truy cập trang nào thì active trang đó lên
 
-Buổi 4 : 
+Buổi 4 :  
 - quét là lấy tin từ rss lưu vào Database
 - Đọc tin từ Database
   + Trong 1 giờ có tin được quét thì tin được đọc từ Database
-  + Nếu trong 1 giờ tin chưa được quét thì sẽ láy tin từ rss lưu vào Database, sau đó lấy từ Database
+  + Nếu trong 1 giờ tin chưa được quét thì sẽ lấy tin từ rss lưu vào Database, sau đó lấy từ Database
 
 
 - active menu
@@ -32,3 +32,11 @@ Buổi 4 :
  + xử lý đọc tin chỉ từ database không coi rss
  + tạo một history các tin đã xem => tạo Database
  + active menu chưa có cách ***** :)))
+
+ event 1 giờ thì check database
+hàng đợi trong laravel
+
+
+queue: 
+create job -> create queue -> change env connect queue
+command: php artisan scans:news

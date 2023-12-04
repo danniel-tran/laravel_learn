@@ -1,7 +1,7 @@
 @php 
     use App\Models\CategoryModel as CategoryModel;
     use App\Helpers\URL;
-
+    $currentPath = "/" . request()->path();
     $categoryModel = new CategoryModel();
     $itemsCategory = $categoryModel->listItems(null, ['task' => 'news-list-items']);
 
@@ -13,27 +13,28 @@
         $xhtmlMenuMobile = '<nav class="menu_nav"><ul class="menu_mm">';
         $categoryIdCurrent = Route::input('category_id');
         foreach ($itemsMenu as $item) {
+            $activeMenu = $currentPath == $item['link'] ? 'class="active"' : '';
             $link        = $item['link'];
-            $classActive = ($categoryIdCurrent == $item['id']) ? 'class="active"' : '';
             $xhtml_child = '';
 
             if($item['type_menu'] == 'category_article'){
                 $xhtml_child = '<ul class="menu_mm_child">';
                 foreach ($itemsCategory as $category) {
+                    $classActiveChild = ($categoryIdCurrent == $category['id']) ? 'class="active"' : '';
                     $link_category       =  URL::linkCategory($category['id'], $category['name']);
-                    $xhtml_child .= '<li>
+                    $xhtml_child .= '<li '.$classActiveChild.'>
                         <a href="'.$link_category.'">'.$category['name'].'</a>
                     </li>';
                 }
                 $xhtml_child .= ' </ul>';
             };
-            $xhtmlMenu .= sprintf('<li %s><a href="%s">%s</a> %s</li>', $classActive, $link, $item['name'],$xhtml_child);
+            $xhtmlMenu .= sprintf('<li %s><a href="%s">%s</a> %s</li>', $activeMenu, $link, $item['name'],$xhtml_child);
             $xhtmlMenuMobile .= sprintf('<li class="menu_mm"><a href="%s">%s</a></li>', $link, $item['name'],);
         }
 
         if (session('userInfo')) {
             $xhtmlMenuUser = sprintf('<li><a href="%s">%s</a></li>', route('auth/logout'), 'Logout');
-        }else {
+        } else {
             $xhtmlMenuUser = sprintf('<li><a href="%s">%s</a></li>', route('auth/login'), 'Login');
         }
 

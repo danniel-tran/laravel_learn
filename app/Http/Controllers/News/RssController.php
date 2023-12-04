@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\News;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;;
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 use App\Models\RssModel;
 use App\Helpers\Feed;
 
 use App\Models\MenuModel;
+use App\Models\RssNewsModel;
 
 class RssController extends Controller
 {
@@ -24,17 +26,28 @@ class RssController extends Controller
 
     public function index(Request $request)
     {
-        view()->share('title', 'Tin tức tổng hợp');
-        $rssModel   = new RssModel();
+        // view()->share('title', 'Tin tức tổng hợp');
+        // $rssModel   = new RssModel();
+        // $menuModel     = new MenuModel();
+
+        // $itemsRss   = $rssModel->listItems(null, ['task'   => 'news-list-items']);
+        // $itemsMenu     = $menuModel->listItems(null, ['task'  => 'news-list-items']);
+
+        // $data = Feed::read($itemsRss);
+
+        // return view($this->pathViewController .  'index', [
+        //     'items'   => $data,
+        //     'itemsMenu'     => $itemsMenu,
+        // ]);
+
+        view()->share('title', "Tin tưc tổng hợp");
+        $rssNewModel = new RssNewsModel();
         $menuModel     = new MenuModel();
 
-        $itemsRss   = $rssModel->listItems(null, ['task'   => 'news-list-items']);
+        $itemRssNewModel = $rssNewModel->getAll();
         $itemsMenu     = $menuModel->listItems(null, ['task'  => 'news-list-items']);
-
-        $data = Feed::read($itemsRss);
-
         return view($this->pathViewController .  'index', [
-            'items'   => $data,
+            'items'   => $itemRssNewModel,
             'itemsMenu'     => $itemsMenu,
         ]);
     }

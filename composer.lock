@@ -8092,7 +8092,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.3|8.1.21"
+        "php": "^7.3|8.1.10"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"
