@@ -14,10 +14,11 @@ class DropRssIdInRssnews extends Migration
      */
     public function up()
     {
-        Schema::table('rssnews', function (Blueprint $table) {
-            DB::statement('ALTER TABLE rssnews DROP FOREIGN KEY rssnews_rss_id_foreign');
-            DB::statement('ALTER TABLE rssnews DROP COLUMN rss_id');
-        });
+        if (Schema::hasColumn("rssnews", "rss_id")) {
+            Schema::table("rssnews", function (Blueprint $table) {
+                $table->dropColumn("rss_id");
+            });
+        }
     }
 
     /**

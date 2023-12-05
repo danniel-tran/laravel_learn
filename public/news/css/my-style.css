@@ -101,6 +101,10 @@ ul.main_nav_list li.active a {
     margin-top: 0;
 }
 
+.grey {
+    color: grey !important;
+}
+
 .main_nav_list li a {
     font-size: 17px;
 }

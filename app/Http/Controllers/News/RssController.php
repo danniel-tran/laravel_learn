@@ -11,6 +11,8 @@ use App\Helpers\Feed;
 
 use App\Models\MenuModel;
 use App\Models\RssNewsModel;
+use App\Models\UserReadModel;
+use Illuminate\Support\Facades\Redirect;
 
 class RssController extends Controller
 {
@@ -22,6 +24,18 @@ class RssController extends Controller
     public function __construct()
     {
         view()->share('controllerName', $this->controllerName);
+    }
+
+    public function userRead(Request $request)
+    {
+        $rss_new_id = $request->rss_new_id;
+        $rssNewItem = RssNewsModel::where("id", $rss_new_id)->first();
+        $userInfo =  $request->session()->get('userInfo');
+        if ($userInfo && $rssNewItem) {
+            UserReadModel::findOrCreate($userInfo['id'], $rss_new_id);
+            return Redirect::to($rssNewItem->link);
+        }
+        return redirect()->route($this->controllerName . "/index")->with("zvn_notify", "Không tìm thấy bài viêt");
     }
 
     public function index(Request $request)
@@ -45,6 +59,20 @@ class RssController extends Controller
         $menuModel     = new MenuModel();
 
         $itemRssNewModel = $rssNewModel->getAll();
+        $userInfo =  $request->session()->get('userInfo');
+        $listRssNews = UserReadModel::where('user_id', $userInfo['id'] ?? 0)->get()->toArray();
+        $listNewsIdRead = array_map(function ($value) {
+            return $value['news_id'];
+        }, $listRssNews);
+
+        $itemRssNewModel = array_map(function ($item) use ($userInfo, $listRssNews, $listNewsIdRead) {
+            if (!$userInfo || !$listRssNews) {
+                $item['isRead'] = false;
+            }
+            $item['isRead'] = in_array($item['id'], $listNewsIdRead);
+            return $item;
+        }, $itemRssNewModel);
+
         $itemsMenu     = $menuModel->listItems(null, ['task'  => 'news-list-items']);
         return view($this->pathViewController .  'index', [
             'items'   => $itemRssNewModel,

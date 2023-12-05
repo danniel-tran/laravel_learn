@@ -75,6 +75,7 @@ Route::group(['prefix' => $prefixNews, 'namespace' => 'News'], function () {
         Route::get('/tin-tuc-tong-hop',                      ['as' => "$controllerName/index",                  'uses' => $controller . 'index']);
         Route::get('/get-gold',                             ['as' => "$controllerName/get-gold",                  'uses' => $controller . 'getGold']);
         Route::get('/get-coin',                             ['as' => "$controllerName/get-coin",                  'uses' => $controller . 'getCoin']);
+        Route::get('/user-read/{rss_new_id}',                 ['as' => "$controllerName/user-read",                  'uses' => $controller . 'userRead']);
     });
 
     // ======================== GALLERY  ========================

@@ -5,10 +5,10 @@
                 @php
                     $name = $item['title'];
                     $thumb = $item['thumb'];
-                    $link = $item['link'];
+                    $link = route($controllerName . '/user-read', ['rss_new_id' => $item['id']]);
                     $pubDate = $item['pubDate'];
                     $description = $item['description'];
-
+                    $classColor = $item['isRead'] ? 'grey' : '';
                 @endphp
                 <div class="col-lg-6">
                     <div class="post_item post_v_med d-flex flex-column align-items-start justify-content-start">
@@ -16,7 +16,7 @@
                             <img src="{{  $thumb  }}" alt="{{ $name }}">
                         </div>
                         <div class="post_content">
-                            <div class="post_title"><a href="{{ $link }}">{{ $name }}</a></div>
+                            <div class="post_title"><a class="{!!$classColor!!}" href="{{ $link }}">{{ $name }}</a></div>
                             <div class="post_info d-flex flex-row align-items-center justify-content-start">
                                 <div class="post_date"><a href="#">{{ $pubDate }}</a></div>
                             </div>
